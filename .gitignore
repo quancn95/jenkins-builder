@@ -1,0 +1,6 @@
+.idea
+.git
+**/.idea
+*.zip
+**/*.zip
+jenkins_home

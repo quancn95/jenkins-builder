@@ -1,0 +1,43 @@
+version: "3.5"
+
+services:
+  jenkins-controller:
+    container_name: jenkins-controller
+    image: jenkins/jenkins:lts-jdk11
+    privileged: true
+    user: root
+    restart: always
+    ports:
+      - 8080:8080
+      - 50000:50000
+    volumes:
+      - /home/vagrant/jenkins/jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - jenkins-net
+
+  #unity_ubuntu_webgl:
+  #  container_name: unity-ubuntu-webgl
+  #  image: unityci/editor:ubuntu-2021.3.2f1-webgl-1.0.1-apk11
+  #  networks:
+  #    - jenkins-net
+  #  stdin_open: true
+  #  tty: true
+
+  jfrog-artifactory:
+    image: docker.bintray.io/jfrog/artifactory-oss:latest
+    container_name: jfrog-artifactory
+    volumes:
+      - /home/vagrant/jfrog/artifactory/var/:/var/opt/jfrog/artifactory
+    ports:
+      - "8081:8081"
+      - "8082:8082"
+    networks:
+      - jenkins-net
+
+volumes:
+  jenkins_home:
+
+networks:
+  jenkins-net:
+

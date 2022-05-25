@@ -29,6 +29,10 @@
         `vagrant ssh controller-ubuntu-1`
             
 * Go to the home directory, then start docker containers for Jenkins and Jfrog applications.
+    
+  Jenkins docker container will act like Jenkins Dashboard and Controller.
+
+  Jfrog Artifactory container is binary repository. We will push artifacts of Jenkins pipeline in.
         
   Note: use this content of [docker-compose.yml](docker-compose.yml) for step 3 below.
   
@@ -200,8 +204,12 @@
 
 * Save the Multibranch Pipeline and you will be able to run pipeline for each branch of Git repository. 
     Example, go to `2D-game-platform` and let try to launch build on branch `main` by click *Build Now*.
+
+    * Currently, the Pipeline will run for each Windows, MacOS and Android targets. And each of target will include jobs: Activate license, Run Test, Build, Publish artifacts from Build to Jfrog artifactory.
   
 * After pipeline finish and pass in all stages, You can see some artifacts are pushed to Jfrog artifactory under `Repository Path: unity-internal/`.
+
+    Artifact will be zipped as `*.tar.gz` file. It contains the Build result of Unity3d.
 
 
 

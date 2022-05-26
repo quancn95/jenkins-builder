@@ -51,7 +51,7 @@ pipeline {
                                 [name: "MacOs", target: "StandaloneOSX", image: "unityci/editor:ubuntu-2021.3.2f1-mac-mono-1"]]
                     parallelStagesMap = list.collectEntries {
                         ["${it.name}" : generateStage(it)]
-                    }
+                    }git
                 }
             }
         }
